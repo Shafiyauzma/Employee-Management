@@ -9,7 +9,7 @@ import Payslip from "../models/Payslip.js";
 // Get dashboard for employee and admin - GET /api/dashboard
 export const getDashboard = async (req, res) => {
     try {
-        const session = req.sessions;
+        const session = req.session;
         if(session.role === "ADMIN"){
             const [totalEmployees, todayAttendance, pendingLeaves ] = await Promise.all([
                 Employee.countDocuments({isDeleted: { $ne: true }}),
@@ -43,7 +43,7 @@ export const getDashboard = async (req, res) => {
                         $gte: new Date(today.getFullYear(), today.getMonth(), 1),
                         $lt: new Date(today.getFullYear(), today.getMonth() + 1, 1)
                     }
-                }).
+                }),
                 LeaveApplication.countDocuments({
                     employeeId: employee._id,
                     status: "PENDING",

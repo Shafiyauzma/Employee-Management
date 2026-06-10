@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const attendanceSchema = new mongoose.Schema({
-    employeeId: { type: mongoose.Schema.Types.ObjectId, ref:"Employee", required: true, unique: true },
+    employeeId: { type: mongoose.Schema.Types.ObjectId, ref:"Employee", required: true },
     date: { type: Date, required: true },
     checkIn: { type: Date, default: null },
     checkOut: { type: Date, default: null },
